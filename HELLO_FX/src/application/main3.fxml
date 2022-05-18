@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?language javascript?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="261.0" prefWidth="261.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<!-- <fx:script>
+	function lblHandle() {
+		lbl.setText("Good evening")
+	}
+</fx:script> -->
+  <children>
+   
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="190.0" prefWidth="275.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField id="tf1" layoutX="20.0" layoutY="39.0" prefHeight="22.0" prefWidth="37.0" />
+            <Label id="lbl" layoutX="70.0" layoutY="43.0" text="+" />
+            <TextField id="tf2" layoutX="90.0" layoutY="39.0" prefHeight="22.0" prefWidth="37.0" />
+            <TextField id="tf3" layoutX="200.0" layoutY="39.0" prefHeight="22.0" prefWidth="37.0" />
+            <Button id="btn" layoutX="144.0" layoutY="39.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="37.0" text="=" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

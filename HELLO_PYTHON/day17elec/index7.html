@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello World!</title>
+<style>
+.it {
+	width: 50px;
+}
+</style>
+<script type="text/javascript">
+	function myclick() {
+		var sstar = document.querySelector("#ita");
+		var estar = document.querySelector("#itb");
+		var ta = document.querySelector("#ta");
+
+		a = parseInt(sstar.value);
+		b = parseInt(estar.value);
+
+		var txt = "";
+
+		for (var i = a; i <= b; i++) {
+			txt += drawStar(i);
+		}
+
+		ta.value = txt;
+	}
+
+	function drawStar(cnt) {
+		var star = "";
+		for (var i = 0; i < cnt; i++) {
+			star += "*";
+		}
+		star += "\n";
+
+		return star;
+	}
+</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td class="mytd">&nbsp;</td>
+			<td class="mytd">&nbsp;</td>
+			<td class="mytd">&nbsp;</td>
+			<td class="mytd">&nbsp;</td>
+			<td class="mytd">&nbsp;</td>
+			<td class="mytd">&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="myib" colspan="6"><input type="button" value="click"
+				id="btn" onclick="myclick()" /></td>
+		</tr>
+	</table>
+</body>
+</html>

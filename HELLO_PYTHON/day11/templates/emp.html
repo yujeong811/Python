@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>리스트화면</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+function fn_add(){
+	   e_id = document.querySelector('#e_id').value
+	   e_name = document.querySelector('#e_name').value
+	   sex = document.querySelector('#sex').value
+	   addr = document.querySelector('#addr').value
+	   
+	      axios({
+	           method : 'post',
+	           url : 'ajax_insert',
+	           data : {"e_id" : e_id, "e_name" : e_name, "sex" : sex, "addr" : addr }
+	         }).then((res)=>{
+	            var cnt = res.data;
+	            if(cnt > 0){
+	               alert("성공");
+	               fn_list();
+	               fn_clean();
+	            }
+	      })
+}
+
+function fn_upd(){
+	   e_id = document.querySelector('#e_id').value
+	   e_name = document.querySelector('#e_name').value
+	   sex = document.querySelector('#sex').value
+	   addr = document.querySelector('#addr').value
+	   
+	      axios({
+	           method : 'post',
+	           url : 'ajax_update',
+	           data : {"e_id" : e_id, "e_name" : e_name, "sex" : sex, "addr" : addr }
+	         }).then((res)=>{
+	            var cnt = res.data;
+	            if(cnt > 0){
+	               alert("성공");
+	               fn_list();
+	               fn_clean();
+	            }
+	      })
+}
+
+function fn_del(){
+	   var flag = confirm("한번 삭제하신 데이터는 복구불가합니다. 그래도 하시겠습니까?");
+	   
+	   if(!flag) {
+		   return;
+	   }
+	   
+	   var e_id = document.querySelector('#e_id').value
+	   
+	      axios({
+	           method : 'post',
+	           url : 'ajax_delete',
+	           data : {"e_id" : e_id}
+	         }).then((res)=>{
+	            var cnt = res.data;
+	            if(cnt > 0){
+	               alert("성공");
+	               fn_list();
+	               fn_clean();
+	            }
+	      })
+}
+
+function fn_clean() {
+	 document.querySelector('#e_id').value="";
+     document.querySelector('#e_name').value="";
+     document.querySelector('#sex').value="";
+     document.querySelector('#addr').value="";
+}
+
+function myinit(){
+    fn_list();
+}
+
+function fn_one(e_id){      
+      axios({
+         method : 'get',
+         url : 'ajax_one?e_id=' + e_id      
+      }).then((res)=>{
+         console.log(res);
+         var one = res.data;
+         document.querySelector('#e_id').value   =one.e_id;
+         document.querySelector('#e_name').value =one.e_name;
+         document.querySelector('#sex').value    =one.sex;
+         document.querySelector('#addr').value   =one.addr;
+      })
+}
+
+function fn_list(){
+      var my_tbody = document.querySelector('#my_tbody');
+      var detail_tbody = document.querySelector('#detail_tbody');
+      
+      axios({
+         method : 'get',
+         url : 'ajax_list'      
+      }).then((res)=>{
+         var htm = "";
+         var trs = res.data;
+         for(var i=0; i<trs.length; i++) {
+            var e_id = trs[i].e_id;
+            var e_name = trs[i].e_name;
+            var sex = trs[i].sex;
+            var addr = trs[i].addr;
+            var htm_tr =
+            		`
+                  <tr>
+                     <td><a href="javascript:fn_one('${e_id}')">${e_id}</a></td>
+                     <td>${e_name}</td>
+                     <td>${sex}</td>
+                     <td>${addr}</td>
+                  </tr>
+                     `;
+                     htm += htm_tr;
+         }
+         my_tbody.innerHTML = htm;   
+      })
+}
+</script>
+</head>
+<body onload="myinit()">
+	<table border="1">
+		<thead>
+			<tr>
+				<td>사번</td>
+				<td>이름</td>
+				<td>성별</td>
+				<td>주소</td>
+			</tr>
+		</thead>
+		<tbody id="my_tbody">
+		</tbody>
+	</table>
+
+	<br />
+
+	<table border='1'>
+		<tbody id="detail_tbody">
+			<tr>
+				<td>사번 <input type="text" id="e_id"></td>
+			</tr>
+			<tr>
+				<td>이름 <input type="text" id="e_name"></td>
+			</tr>
+			<tr>
+				<td>성별 <input type="text" id="sex"></td>
+			</tr>
+			<tr>
+				<td>주소 <input type="text" id="addr"></td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="추가" onclick="fn_add()">
+					<input type="button" value="수정" onclick="fn_upd()">
+					<input type="button" value="삭제" onclick="fn_del()">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>zoom</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+
+<script type="text/javascript">
+
+function create_zoom(){
+	$.ajax({
+		url : 'createZoom',
+		method : 'get',
+		success : function(res){
+			console.log(res.join_url);
+			window.open(res.join_url);
+		},
+		error : function(xhr){
+			alert(xhr.status);
+		},
+		dataType : 'json'
+	});
+}
+
+	
+
+</script>
+</head>
+
+<body onload="">
+
+<div class= "wrapper">
+	<table>
+		<tr>
+			<td><h3>밑의 버튼을 누르시면 회의방을 호스트로 생성합니다.</h3></td>
+		</tr>
+		<tr>
+			<td><input type = "button" id = "crbtn" value = "회의방 생성" onclick = "create_zoom();"></td>
+		</tr>
+	</table>
+
+</div>
+
+</body>
+</html>

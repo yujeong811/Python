@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>리스트화면</title>
+<script>
+function fn_add(){
+    location.href="add";
+}
+
+function fn_mod(e_id){
+    location.href="modify?e_id="+e_id;
+}
+
+function fn_del(e_id){
+	var flag = confirm("한번 지워진 데이터는 복구할 수 없습니다. 그래도 삭제하시겠습니까?");
+	if(!flag) {
+		return;
+	} else {
+  		location.href="del_act?e_id="+e_id;		
+	}
+}
+
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td>사번</td>
+		<td>이름</td>
+		<td>성별</td>
+		<td>주소</td>
+		<td>
+			<input type="button" value="추가" onclick="fn_add()"/>
+		</td>
+	</tr>
+{% for e in emps %}
+	<tr>
+		<td> {{e.e_id}} </td>
+		<td> {{e.e_name}} </td>
+		<td> {{e.sex}} </td>
+		<td> {{e.addr}} </td>
+		<td> 
+			<input type="button" value="수정" onclick="fn_mod('{{e.e_id}}')"/>
+			<input type="button" value="삭제" onclick="fn_del('{{e.e_id}}')"/>
+		</td>
+	</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
